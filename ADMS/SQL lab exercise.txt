@@ -1,0 +1,13 @@
+select * from emp;
+SELECT Empno, Ename, Sal, ROUND(Sal/30, 3) AS Daily_sal, Sal * 12 AS Annsal FROM EMP ORDER BY Annsal ASC;
+SELECT Empno, Ename, Sal FROM EMP WHERE MGR = 7369;
+select * from emp where comm>sal;
+select * from emp where deptno <>20;
+select * from emp where deptno=10 order by sal asc;
+select * from emp where sal*12 between 23000 and 40000;
+SELECT * FROM emp WHERE mgr IN (7369, 7890, 7654, 7900);
+SELECT Empno, Ename, Sal FROM Emp WHERE Job IN ('CLERK', 'ANALYST') ORDER BY Sal DESC;
+select * from  emp where (job='ANALYST' or job like '%MANAGER%') and sal between 2000 and 4000;
+select * from  emp where hiredate>'01-01-1982' and sal >1700 order by hiredate;
+SELECT empno, ename, job, deptno, sal FROM emp WHERE (job = 'SALESMAN' OR job = 'ANALYST') AND (deptno = 10 OR deptno = 20) AND (sal >= 1500 AND 
+sal <= 2800)ORDER BY empno;
