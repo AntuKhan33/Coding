@@ -1,0 +1,162 @@
+#include<stdio.h>
+#include <stdbool.h>
+
+void x( ){
+    printf("I just here");
+}
+
+int main(){
+
+// int x=15;
+// float myfloatnum =1.5;
+// char letter ='d';
+
+
+// printf("%d\n",x);
+// printf("%f\n",myfloatnum);
+// printf("%c\n",letter);
+// printf("My int value is  %d and float value is %f and char value is %c\n",x,myfloatnum,letter);
+
+// printf("My favorite number is: %d", 15);
+// printf("My favorite letter is: %c", 'D');
+
+// int x = 5, y = 6, z = 50;
+// printf("%d", x + y + z);
+// char x[]="hello";
+// printf("%s",x);
+// double x=5;
+// printf("%.1lf",x);
+
+// const int x=15;
+// int x=10;
+// x+=50;
+// printf("%d",x);
+
+// bool x=true;
+// printf("%d",x);
+
+// if (20 > 18) {
+//   printf("20 is greater than 18");
+// }
+  
+// int x=10,y=20;  
+  
+// if (x>y){
+//     printf("Great");
+// }
+// else{
+//     printf("Less");
+// }
+  
+// int time = 22;
+  
+//   if (time<10) {
+//       printf("Good morning");
+      
+//   }else if (time<20){
+//       printf("Good day");
+//   }else{
+//       printf("Good evening");
+//   }
+    
+    // int day=4;
+    // switch  (day){
+    //     case 1:printf("Monday");
+    //     break;
+    //     case 4:printf("Wednesaday");
+    //     break;
+    // default :
+    // printf("weekend");
+    // }
+    
+    // int i=0;
+    // while(i<5){
+    //     printf("%d",i);
+    //     i++;
+    // }
+    // int i=0;
+    // do {
+    //     printf("%d",i);
+    //     i++;
+    // }while(i<5);
+    
+//     int i ;
+//     for (i=0;i<5;i++){
+//         printf("%d",i);
+        
+//     }
+// }
+
+// int i, j;
+
+// // Outer loop
+// for (i = 1; i <= 2; ++i) {
+//   printf("Outer: %d\n", i);  // Executes 2 times
+
+//   // Inner loop
+//   for (j = 1; j <= 3; ++j) {
+//     printf(" Inner: %d\n", j);  // Executes 6 times (2 * 3)
+//   }
+// }
+
+
+// int i, j;
+
+// for (i = 1; i <= 3; i++) {
+//   for (j = 1; j <= 3; j++) {
+//     printf("%d ", i * j);
+//   }
+//   printf("\n");
+// }
+
+// int i;
+  
+//   for (i = 1; i < 10; i = i + 2) {
+//     printf("%d\n", i);
+//   }
+
+// int mynumbers[]={1,2,3};
+
+// printf("%d",mynumbers[0]);
+
+// int myNumbers[] = {25, 50, 75, 100};
+
+// int size=sizeof(myNumbers)/sizeof(myNumbers[0]);
+
+// for (int i=0;i<size;i++){
+//     printf("%d",myNumbers[i]);
+// }
+
+// char greetings[] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\0'};
+// printf("%s", greetings);
+
+// printf("Enter a vlaue");
+// int mynum;
+// scanf("%d",&mynum);
+
+// printf("%d",mynum);
+// int val;
+// char x;
+// printf("Enter multiple value");
+// scanf("%d %c",&val,&x);
+// printf("value is %d and char is %c",val,x);
+
+
+// char firstName[30];
+
+// printf("Enter your name");
+// scanf("%s",firstName);
+// printf("%s",firstName);
+
+// int myage=43;
+// printf("%p",&myage);
+
+
+// x();
+
+
+
+
+
+
+}
