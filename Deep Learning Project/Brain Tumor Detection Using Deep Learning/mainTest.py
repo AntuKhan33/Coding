@@ -1,0 +1,21 @@
+import cv2
+from keras.models import load_model
+from PIL import Image
+import numpy as np
+
+model = load_model('BrainTumor10EpochsCategorical.h5')
+
+# Load and preprocess the image
+image = cv2.imread('E:\Code\Deep Learning Project\Brain Tumor Detection Using Deep Learning\pred\pred5.jpg')
+img = Image.fromarray(image)
+img = img.resize((64, 64))
+img = np.array(img)
+input_img = np.expand_dims(img, axis=0)
+
+# Predict the class probabilities
+probs = model.predict(input_img)
+
+# Get the predicted class index (class with the highest probability)
+predicted_class = np.argmax(probs)
+
+print("Predicted Class:", predicted_class)
