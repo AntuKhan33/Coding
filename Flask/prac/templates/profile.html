@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+  </head>
+  <body>
+    <h1>Welcome to your Profile!</h1>
+    <p><strong>Name:</strong> {{ name if name else 'N/A' }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+
+    <!-- Logout Button -->
+    <a href="{{ url_for('logout') }}">Logout</a>
+    
+    <!-- Go back to home button -->
+    <br><br>
+    <a href="/">Go back to Home</a>
+  </body>
+</html>

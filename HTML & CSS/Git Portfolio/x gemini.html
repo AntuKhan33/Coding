@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mursalin Khan</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Palette */
+            --bg-body: #f1f5f9;
+            --bg-sidebar: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-light: rgba(37, 99, 235, 0.08);
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- GLOBAL RESET & SCROLL FIX --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.03) 0%, transparent 20%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* --- LAYOUT --- */
+        .app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+            margin: 0 auto 1rem;
+            display: block;
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+            will-change: transform;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.18);
+        }
+
+        /* entrance animation */
+        .profile-section {
+            opacity: 0;
+            transform: translateY(-8px);
+            animation: slideIn 600ms ease-out 150ms forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-item {
+            opacity: 0;
+            transform: translateX(-6px);
+            animation: slideIn 600ms ease-out forwards;
+        }
+
+        .contact-item {
+            transition: transform 0.25s ease;
+        }
+
+        .contact-item[data-i="1"] {
+            animation-delay: 160ms;
+        }
+
+        .contact-item[data-i="2"] {
+            animation-delay: 240ms;
+        }
+
+        .contact-item[data-i="3"] {
+            animation-delay: 320ms;
+        }
+
+        .contact-item[data-i="4"] {
+            animation-delay: 380ms;
+        }
+
+        .contact-item[data-i="5"] {
+            animation-delay: 440ms;
+        }
+
+        .contact-item[data-i="6"] {
+            animation-delay: 500ms;
+        }
+
+        .name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .role-wrapper {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            min-height: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* --- CITATION BOX --- */
+        .citation-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .citation-header {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .citation-header a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .citation-header a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .citation-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .citation-table th {
+            text-align: right;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+        }
+
+        .citation-table td {
+            padding: 4px 0;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        .citation-table td:first-child {
+            text-align: left;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* --- CONTACT INFO --- */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            transition: 0.2s;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background: #f8fafc;
+            border-color: var(--border);
+            transform: translateX(3px);
+            color: var(--text-main);
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            width: 18px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            position: sticky;
+            top: 0;
+            background: rgba(241, 245, 249, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 50;
+            border-bottom: 1px solid var(--border);
+            height: 80px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Mobile specific scrollable nav links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .top-nav.shrink {
+            height: 60px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .top-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+            transition: 0.3s;
+        }
+
+        .top-nav.shrink a {
+            font-size: 0.9rem;
+        }
+
+        .top-nav a:hover,
+        .top-nav a.active {
+            color: var(--accent);
+        }
+
+        .top-nav a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent);
+        }
+
+        /* CV BUTTON IN NAV */
+        .cv-nav-btn {
+            background: var(--accent);
+            color: white !important;
+            padding: 8px 18px !important;
+            border-radius: 8px;
+            font-size: 0.85rem !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transition: 0.3s;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+
+        .cv-nav-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            padding: 0;
+            position: relative;
+        }
+
+        .content-wrapper {
+            padding: 2rem 3rem 4rem;
+        }
+
+        /* --- SECTIONS & CARDS --- */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.6s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            transition: 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* --- LISTS & TIMELINE --- */
+        .academic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .academic-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .academic-item::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+
+        .paper-title {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.2s;
+            display: inline;
+            line-height: 1.4;
+        }
+
+        .paper-title:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .paper-details {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        /* Publications layout and hover (card system) */
+        .pub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1rem;
+        }
+
+        .pub-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            box-shadow: var(--shadow);
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .pub-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .pub-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        .pub-card-link:focus {
+            outline: 2px solid rgba(14, 165, 164, 0.18);
+            outline-offset: 4px;
+        }
+
+        .pub-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pub-meta {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        .pub-badges {
+            margin-top: 6px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.72rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(14, 165, 164, 0.08);
+            color: var(--accent);
+            font-weight: 700;
+            border: 1px solid rgba(14, 165, 164, 0.12);
+        }
+
+        .pub-card .fas.fa-external-link-alt {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .journal-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .q1-tag {
+            background: #166534;
+            color: white;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .timeline {
+            border-left: 2px solid var(--border);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-body);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 700;
+            background: var(--accent-light);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .timeline-role {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .timeline-company {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        /* --- SKILLS --- */
+        .skill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-card);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            font-weight: 500;
+            transition: 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* --- SERVICE GRID --- */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            transition: 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            font-size: 1.3rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .service-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .service-subtitle {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .service-date {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* --- PhD Callout & Section --- */
+        .phd-callout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: linear-gradient(90deg, rgba(14, 165, 164, 0.12), rgba(14, 165, 164, 0.06));
+            border: 1px solid rgba(14, 165, 164, 0.15);
+            color: #064e47;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 6px 18px rgba(3, 105, 118, 0.06);
+            animation: phdPulse 1400ms ease-in-out infinite 800ms;
+        }
+
+        @keyframes phdPulse {
+            0% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-3px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        .phd-callout .phd-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .phd-btn {
+            background: var(--accent);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .phd-btn:hover {
+            background: #0b7280;
+        }
+
+        .phd-dismiss {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            color: #064e47;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+        }
+
+        .phd-dismiss:focus {
+            outline: 2px solid rgba(14, 165, 164, 0.18);
+        }
+
+        /* PhD section tweaks */
+        #phd .glass-card {
+            border-left: 4px solid rgba(14, 165, 164, 0.12);
+        }
+
+        /* --- MOBILE ADAPTATIONS --- */
+        @media (max-width: 900px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                height: auto;
+                padding: 2rem 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                position: relative;
+            }
+
+            .content-wrapper {
+                padding: 2rem 1.5rem;
+            }
+
+            .top-nav {
+                height: auto;
+                padding: 0.8rem 1rem;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .nav-links {
+                flex-grow: 1;
+                padding: 10px 0;
+            }
+
+            .cv-nav-btn {
+                margin-left: auto;
+                padding: 6px 12px !important;
+                font-size: 0.75rem !important;
+            }
+
+            .citation-box {
+                max-width: 100%;
+                margin: 0 auto 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .glass-card {
+                padding: 1.2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name {
+                font-size: 1.2rem;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .top-nav a {
+                font-size: 0.85rem;
+            }
+
+            .top-nav {
+                height: 70px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .cv-nav-btn i {
+                margin-right: 0;
+            }
+
+            .cv-nav-btn span {
+                display: none;
+            }
+
+            /* Show icon only for tiny screens */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMJdz82POVvnzzYwI_Mmk7zjhZRSzveMERySNNmaswOHfn9nC2mDlMGMiz2FY9m598vEnb4uybERwvmuyOHKfyGVUCn2tMsMV4udGXgqaBvYl-ZfxQ0gd2mIm4qpuHuB4uJGlPUExE-ngMelA51-asTe0TdCGOZMtAg1YY-TVA5KOjtS9pymjPuYEb2fo/s800/1685212691293.jpeg"
+                    alt="MD Jakir Hossain, a professional headshot portrait of a man with a neutral, approachable expression against a plain background"
+                    class="profile-img">
+                <h1 class="name">Mursalin Khan</h1>
+                <div class="role-wrapper">
+                    <span id="typewriter"></span>
+                </div>
+                <div id="phdCallout" class="phd-callout" role="region" aria-label="Seeking PhD opportunities">
+                    <div class="phd-msg">Actively seeking <strong>PhD opportunities</strong></div>
+                    <div class="phd-actions">
+                        <a href="mailto:antukhan33@gmail.com?subject=PhD%20Opportunity%20Inquiry"
+                            class="phd-btn">Contact for PhD</a>
+                        <button id="phdDismiss" class="phd-dismiss" aria-label="Dismiss PhD callout">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="citation-box">
+                <div class="citation-header">
+                    <a href="https://scholar.google.com/citations?user=5Tw5v8UAAAAJ&hl=en" target="_blank"
+                        title="View Google Scholar Profile"
+                        style="text-decoration: none; color: inherit; cursor: pointer;">
+                        Scholar Statistics
+                    </a>
+                    <i class="fas fa-external-link-alt" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+                </div>
+                <table class="citation-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>All</th>
+                            <th>Since 2024</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Citations</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>h-index</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>i10-index</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="contact-info">
+
+                <a class="contact-item" data-i="1" href="tel:+8801999986000">
+                    <i class="fas fa-phone"></i>
+                    <span>(+880) 1999986000</span>
+                </a>
+
+                <a class="contact-item" data-i="2" href="mailto:antukhan33@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                    <span>antukhan33@gmail.com</span>
+                </a>
+
+                <a class="contact-item" data-i="3" href="https://jakirniloy.blogspot.com/" target="_blank"
+                    rel="noopener">
+                    <i class="fas fa-link"></i>
+                    <span>Homepage</span>
+                </a>
+
+                <a class="contact-item" data-i="4" href="https://scholar.google.com/citations?user=5Tw5v8UAAAAJ&hl=en"
+                    target="_blank" rel="noopener">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Google Scholar</span>
+                </a>
+
+                <a class="contact-item" data-i="5" href="https://github.com/AntuKhan33/Coding" target="_blank"
+                    rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+
+                <a class="contact-item" data-i="6" href="https://www.linkedin.com/in/mursalinkhan/" target="_blank"
+                    rel="noopener">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            <nav class="top-nav">
+                <div class="nav-links">
+                    <a href="#about" class="active">Summary</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#publications">Publications</a>
+
+
+                    <a href="#skills">Skills</a>
+                    <a href="#education">Education</a>
+                    <a href="#research">Research</a>
+                    <!-- <a href="#service">Academic Affiliations</a> -->
+                    <a href="#awards">Awards</a>
+                </div>
+                <a href="#" target="_blank" class="cv-nav-btn">
+                    <i class="fas fa-file-download"></i> <span>Download CV</span>
+                </a>
+            </nav>
+
+            <div class="content-wrapper">
+
+                <section id="about">
+                    <h2 class="section-title"><i class="fas fa-user-circle"></i>Summary</h2>
+                    <div class="glass-card">
+                        <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.8;">
+                            <strong>Mursalin Khan</strong> is Developing MS in Computer Science and Engineering with
+                            research
+                            and development experience in
+                            <strong style="color:var(--accent);">Machine Learning, Deep Learning, and Computer
+                                Vision</strong>. His research focuses on medical image analysis, deceptive review
+                            detection, and NLP for low-resource languages.
+                            He has experience as a as a Junior AI Engineer, contributing to model design, training, and
+                            deployment while integrating Explainable AI techniques to improve model trust.
+                        </p>
+                    </div>
+                </section>
+                <section id="phd" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Seeking PhD opportunities</h2>
+                    <div class="glass-card">
+                        <p style="color: var(--text-main); font-size: 1rem; line-height:1.6; margin-bottom:8px;">I am
+                            actively seeking PhD opportunities in Machine Learning, Computer Vision and Medical Image
+                            Analysis. I am interested in positions offering research collaboration or funded PhD
+                            positions, particularly those focusing on explainability, transfer learning, and practical
+                            deployment of models in healthcare.</p>
+                        <p class="pub-meta" style="margin-bottom:8px;"><strong>Research interests:</strong> Medical
+                            image analysis, Explainable AI, Deep learning, Transfer learning, NLP for low-resource
+                            languages.</p>
+                        <div><a class="cv-nav-btn"
+                                href="mailto:antukhan33@gmail.com?subject=PhD%20Opportunity%20Inquiry"
+                                target="_blank">Contact for PhD</a></div>
+                    </div>
+                </section>
+                <section id="experience" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item"><span class="timeline-date">Apr 2025 – Present</span>
+                            <h3 class="timeline-role">Junior ML Engineer</h3>
+                            <p class="timeline-company">Machine Learning, Computer Vision, and Medical Image</p>
+                            <p class="timeline-desc">Contributed to the development and deployment of AI solutions,
+                                built ML pipelines, trained and optimized models, and collaborated with cross-functional
+                                teams to integrate models into production.</p>
+                        </div>
+                        <div class="timeline-item"><span class="timeline-date">Jun 2025 – Aug 2025</span>
+                            <h3 class="timeline-role">Research Assistant</h3>
+                            <p class="timeline-company"> </p>
+                            <p class="timeline-desc"></p>
+                        </div>
+                        <div class="timeline-item"><span class="timeline-date">Jan 2024 – Apr 2024</span>
+                            <h3 class="timeline-role">Instructor</h3>
+                            <p class="timeline-company">Department of Mathematics, Physics, and Statistics — East West
+                                University</p>
+                            <p class="timeline-desc">• Served as an Instructor at iLearnX Live for three months.
+                                • Conducted Python programming courses, focusing on both theoretical and practical
+                                aspects.
+                                • Developed course content and delivered interactive sessions to engage learners
+                                effectively.
+                                • Guided students through hands-on exercises to enhance their understanding of coding
+                                concepts.</p>
+                        </div>
+                        <div class="timeline-item"><span class="timeline-date">Dec 2023 – May 2024</span>
+                            <h3 class="timeline-role">Research Assistant</h3>
+                            <p class="timeline-company">American International University Bangladesh(Supervisor:
+                                Professor Dr. Kamruddin Nur)</p>
+                            <p class="timeline-desc">• Conducted research on AI applications, contributing to published
+                                papers. </br>
+                                • Assisted in the development and analysis of research projects across diverse
+                                subjects.</br>
+                                • Collaborated with faculty and research teams to support the creation of scholarly
+                                articles.</br>
+                                • Managed data collection, analysis, and interpretation to advance research objectives.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="publications" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-book-open"></i> Publications</h2>
+                    <div class="glass-card">
+                        <div class="pub-grid">
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.55529/jpps.36.13.33" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <div class="pub-title">An in-Depth Analysis of Military Casualties: Predicting
+                                        Russian Losses in the Russia-Ukraine Conflict
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </div>
+                                    <div class="pub-meta">Sharia Arfin Tanim, Mursalin Khan, Fariya Sultana Prity, Kazi
+                                        Tanvir, Valliappan Raju
+                                    </div>
+                                    <div class="pub-badges"><span class="badge">ICO 2023</span><span
+                                            class="badge">doi.org/10.55529/jpps.36.13.33</span></div>
+                                </a>
+                            </article>
+                            <!-- 
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-3-031-36246-0_18" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Deciphering Handwritten Text: A Convolutional Neural Network Framework for Handwritten Character Recognition <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. J. Hossain, S. S. Zaman, F. R. Akash, F. Alam, A. W. Reza, and M. S. Arefin · ICO · 2023</div>
+                                    <div class="pub-badges"><span class="badge">ICO 2023</span><span class="badge">doi:10.1007/978-3-031-36246-0_18</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/ICCIT60459.2023.10441107" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Developing a Bangla Handwritten Text Recognition Framework using Deep Learning <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. J. Hossain, S. S. Zaman, F. R. Akash, M. R. Sarker, and M. R. Huq · ICCIT · 2023</div>
+                                    <div class="pub-badges"><span class="badge">ICCIT 2023</span><span class="badge">doi:10.1109/ICCIT60459.2023.10441107</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/ICCIT60459.2023.10441555" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Smart Spectacles for The Deaf with Voice to Text and Sign Language Integration <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. M. Hassan, M. A. Mahmud, A. Shahriyar, N. Sarkar, S. C. Mohonto, and M. J. Hossain · ICCIT · 2023</div>
+                                    <div class="pub-badges"><span class="badge">ICCIT 2023</span><span class="badge">doi:10.1109/ICCIT60459.2023.10441555</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-981-97-3594-5_38" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Detection of Deceptive Hotel Reviews Through the Application of Machine Learning Techniques <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. J. Hossain et al. · CIIR · 2023</div>
+                                    <div class="pub-badges"><span class="badge">CIIR 2023</span><span class="badge">doi:10.1007/978-981-97-3594-5_38</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-981-97-3594-5_39" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Detecting Crop Pests and Diseases Through Deep Learning Techniques for Improved Yields <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. T. Chowdhury, M. J. Hossain, O. R. Adnan, et al. · CIIR · 2023</div>
+                                    <div class="pub-badges"><span class="badge">CIIR 2023</span><span class="badge">doi:10.1007/978-981-97-3594-5_39</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-3-031-73318-5_10" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Enhancing Skin Cancer Detection Through Automated Classification Using Convolutional Neural Networks <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. J. Hossain et al. · ICO · 2023</div>
+                                    <div class="pub-badges"><span class="badge">ICO 2023</span><span class="badge">doi:10.1007/978-3-031-73318-5_10</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/COMPAS60761.2024.10796987" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Utilizing Deep Learning for Detecting Malaria in Blood Cell Images <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. Wahiduzzaman, M. J. Fokir, S. A. Rimi, et al. · COMPAS · 2024</div>
+                                    <div class="pub-badges"><span class="badge">COMPAS 2024</span><span class="badge">doi:10.1109/COMPAS60761.2024.10796987</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/COMPAS60761.2024.10796262" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Developing a Model for Predicting Multiple Sclerosis Progression Using MRI Scans <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">R. Jahan, A. Sarker, A. S. Yasmin, et al. · COMPAS · 2024</div>
+                                    <div class="pub-badges"><span class="badge">COMPAS 2024</span><span class="badge">doi:10.1109/COMPAS60761.2024.10796262</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/COMPAS60761.2024.10797116" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Dermatological Disease Detection Using Image Processing and Deep Learning <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">N. N. Juthi, T. S. Mahi, S. H. Khan, et al. · COMPAS · 2024</div>
+                                    <div class="pub-badges"><span class="badge">COMPAS 2024</span><span class="badge">doi:10.1109/COMPAS60761.2024.10797116</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-981-96-6053-7_28" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Enhancing Fake News Detection Through Machine Learning and Transfer Learning Methods <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. J. Hossain et al. · ICDMIS · 2024</div>
+                                    <div class="pub-badges"><span class="badge">ICDMIS 2024</span><span class="badge">doi:10.1007/978-981-96-6053-7_28</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-981-96-6060-5_8" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Deciphering Textual Emotions: Sentiment Analysis with Comprehensive Improvement Through Transfer Learning <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. J. Hossain et al. · ICDMIS · 2024</div>
+                                    <div class="pub-badges"><span class="badge">ICDMIS 2024</span><span class="badge">doi:10.1007/978-981-96-6060-5_8</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-981-96-6303-3_20" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Detection of Sugarcane Leaf Diseases Using Custom CNN and ResNet50 <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. S. Islam et al. · ICIDA · 2024</div>
+                                    <div class="pub-badges"><span class="badge">ICIDA 2024</span><span class="badge">doi:10.1007/978-981-96-6303-3_20</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1007/978-981-96-6303-3_42" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Earthquake Magnitude Prediction: A Survey on Machine Learning Models, Datasets, Techniques, Challenges, and Future Directions <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. S. Islam et al. · ICIDA · 2024</div>
+                                    <div class="pub-badges"><span class="badge">ICIDA 2024</span><span class="badge">doi:10.1007/978-981-96-6303-3_42</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/QPAIN66474.2025.11172002" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Deep Learning-Based Classification of Coconut Leaf Diseases Using Optimized CNN Models <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">M. S. Islam et al. · QPAIN · 2025</div>
+                                    <div class="pub-badges"><span class="badge">QPAIN 2025</span><span class="badge">doi:10.1109/QPAIN66474.2025.11172002</span></div>
+                                </a>
+                            </article>
+
+                            <article class="pub-card">
+                                <a class="pub-card-link" href="https://doi.org/10.1109/QPAIN66474.2025.11171720" target="_blank" rel="noopener noreferrer">
+                                    <div class="pub-title">Measuring Accuracy of Different Machine Learning Algorithms on Expectations and Experiences of University Students <i class="fas fa-external-link-alt"></i></div>
+                                    <div class="pub-meta">S. S. Zaman et al. · QPAIN · 2025</div>
+                                    <div class="pub-badges"><span class="badge">QPAIN 2025</span><span class="badge">doi:10.1109/QPAIN66474.2025.11171720</span></div>
+                                </a>
+                            </article>
+
+                        </div>
+                    </div> -->
+                </section>
+
+
+
+                <section id="skills" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-layer-group"></i> Technical Skills</h2>
+                    <h3 style="color: var(--text-main); margin: 1.5rem 0 1rem; font-size: 1.1rem;">AI & Data Science
+                    </h3>
+                    <div class="skill-group">
+                        <span class="skill-tag">Machine Learning</span><span class="skill-tag">Deep Learning</span><span
+                            class="skill-tag">Computer Vision</span><span class="skill-tag">Natural Language
+                            Processing</span><span class="skill-tag">Explainable AI (XAI)</span><span
+                            class="skill-tag">TensorFlow</span><span class="skill-tag">PyTorch</span><span
+                            class="skill-tag">Scikit-learn</span>
+                    </div>
+                    <h3 style="color: var(--text-main); margin: 1.5rem 0 1rem; font-size: 1.1rem;">Data & Tools</h3>
+                    <div class="skill-group">
+                        <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span
+                            class="skill-tag">SciPy</span><span class="skill-tag">OpenCV</span><span
+                            class="skill-tag">scikit-image</span>
+                    </div>
+                    <h3 style="color: var(--text-main); margin: 1.5rem 0 1rem; font-size: 1.1rem;">Development &
+                        Databases</h3>
+                    <div class="skill-group">
+                        <span class="skill-tag">Python</span><span class="skill-tag">Java</span><span
+                            class="skill-tag">C</span><span class="skill-tag">C++</span><span
+                            class="skill-tag">PHP</span><span class="skill-tag">SQL</span><span
+                            class="skill-tag">Flask</span><span class="skill-tag">MySQL</span><span
+                            class="skill-tag">SQLite</span>
+                    </div>
+                    <!-- <div class="glass-card">
+                        <h3 style="margin-bottom: 0.6rem; color: var(--text-main);">Academic Affiliations</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 0.6rem;">• EWU Computer Programming Club (EWUCoPC) — Vice-President<br>• East West University Sports Club — SGM</p>
+                        <h3 style="margin-bottom: 0.6rem; color: var(--text-main);">Programming Languages</h3>
+                        <p style="color: var(--text-muted);">Python, Java, C, C++, PHP, Dart, SQL</p>
+                    </div> -->
+                </section>
+
+                <section id="education" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-university"></i> Education</h2>
+                    <div class="glass-card">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2rem;">MS in Computer Science </h3>
+                                <p style="color: var(--accent); font-weight: 600;">American International University -
+                                    Bangladesh (AIUB)</p>
+                                <p style="font-size:0.9rem; color:#64748b;">Major: Intelligence System</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="color: var(--text-muted); display: block; margin-bottom: 5px;">Oct 2025 –
+                                    Jan 2026</span>
+                                <span
+                                    style="font-weight: bold; background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 4px;">GPA:
+                                    Running/4.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                            <div>
+                                <h3 style="font-size: 1.2rem;">B.Sc. in Computer Science and Engineering</h3>
+                                <p style="color: var(--accent); font-weight: 600;">American International University -
+                                    Bangladesh (AIUB)</p>
+                                <p style="font-size:0.9rem; color:#64748b;">Major: Information System</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="color: var(--text-muted); display: block; margin-bottom: 5px;">Jan 2020 –
+                                    May 2024</span>
+                                <span
+                                    style="font-weight: bold; background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 4px;">GPA:
+                                    3.64/4.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="research" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-flask"></i> Research & Projects</h2>
+                    <!-- <div class="glass-card">
+                        <h3 style="margin-bottom: 0.8rem; color: var(--text-main);">Master’s Thesis</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 8px;"><strong>Diabetic Retinopathy Detection using Attention-Enhanced Transfer Learning and Explainable AI Techniques</strong></p>
+                        <p style="font-size: 0.95rem; color:#475569;">Supervisor: Dr. Mohammad Rifat Ahmmad Rashid (EWU). Proposed an automated system for diabetic retinopathy detection using attention-enhanced transfer learning and Grad-CAM based explainability to enhance clinical interpretability and generalization across datasets.</p>
+                    </div> -->
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 0.8rem; color: var(--text-main);">Capstone Project</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 8px;"><strong>Smart Aquafarming: Enhancing
+                                Mud Crab Farming with
+                                Machine Learning, Explainable AI, and IoT</strong></p>
+                        <p style="font-size: 0.95rem; color:#475569;">Shahriar Siddique Ayon ,Fahmid Al Farid , Mursalin
+                            khan, Sharia Arfin Tanim, Kamruddin Nur , Abdullah Al Mamun, Jia Uddin , Hezerul Abdul Karim
+                            , Md. Saef Ullah Miah
+                        </p>
+                    </div>
+                </section>
+
+                <section id="research" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-flask"></i> Non Academic Projects</h2>
+                    <!-- <div class="glass-card">
+                        <h3 style="margin-bottom: 0.8rem; color: var(--text-main);">Master’s Thesis</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 8px;"><strong>Diabetic Retinopathy Detection using Attention-Enhanced Transfer Learning and Explainable AI Techniques</strong></p>
+                        <p style="font-size: 0.95rem; color:#475569;">Supervisor: Dr. Mohammad Rifat Ahmmad Rashid (EWU). Proposed an automated system for diabetic retinopathy detection using attention-enhanced transfer learning and Grad-CAM based explainability to enhance clinical interpretability and generalization across datasets.</p>
+                    </div> -->
+                    <div class="glass-card">
+                        <h3 style="margin-bottom: 0.8rem; color: var(--text-main);"> <a
+                                href="https://github.com/AntuKhan33/Coding/tree/main/Machine%20Learning%20Project">300+
+                                Project in Machine Learning</a> </h3>
+                        <p style="color: var(--text-muted); margin-bottom: 8px;"><strong>
+
+                                Machine Learning,Deep learnign ,NLP ,Generative AI, LLM, RAG Explainable AI</strong></p>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+                <!-- 
+                <section id="service" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-user-friends"></i> Academic Affiliations</h2>
+                    <div class="service-grid">
+                        <div class="service-card">
+                            <i class="fas fa-code service-icon" style="color: var(--accent);"></i>
+                            <div>
+                                <h3 class="service-title">EWU Computer Programming Club (EWUCoPC)</h3>
+                                <p class="service-subtitle">Vice-President</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <i class="fas fa-basketball-ball service-icon" style="color: var(--accent);"></i>
+                            <div>
+                                <h3 class="service-title">East West University Sports Club</h3>
+                                <p class="service-subtitle">SGM</p>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+
+                <section id="awards" class="fade-in">
+                    <h2 class="section-title"><i class="fas fa-trophy"></i> Awards And Achievements </h2>
+                    <div class="glass-card" style="padding: 1.5rem;">
+                        <div
+                            style="display: flex; gap: 15px; align-items: start; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                            <i class="fas fa-award" style="color: #d97706; font-size: 1.2rem; margin-top: 3px;"></i>
+                            <div>
+                                <h3 style="font-size: 1rem;"> Kaggle</h3>
+                                <p style="color: var(--text-main); font-weight: 600; font-size: 0.95rem;">• 2nd runner
+                                    up in Data Science at Grad Bunker Lab
+                                    <br>• 50th in Data Science at CalorieQuest
+                                </p>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">2020-2025</p>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div style="display: flex; gap: 15px; align-items: start; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                            <i class="fas fa-medal" style="color: #d97706; font-size: 1.2rem; margin-top: 3px;"></i>
+                            <div>
+                                <h3 style="font-size: 1rem;">2nd Runner up on Project Showcasing Competition</h3>
+                                <p style="color: var(--text-main); font-weight: 600; font-size: 0.95rem;">EAST WEST UNIVERSITY CSE FEST 2024</p>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Project: Real Time Device Control with Brain Computer Interface</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 15px; align-items: start; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                            <i class="fas fa-star" style="color: #d97706; font-size: 1.2rem; margin-top: 3px;"></i>
+                            <div>
+                                <h3 style="font-size: 1rem;">EWU STUDENTS SCHOLARLY DEV. FUND</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">East West University | November 2022</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 15px; align-items: start; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                            <i class="fas fa-server" style="color: #d97706; font-size: 1.2rem; margin-top: 3px;"></i>
+                            <div>
+                                <h3 style="font-size: 1rem;">Best System Administrator 2021</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">SSBD | December 2021</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 15px; align-items: start; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                            <i class="fas fa-bullhorn" style="color: #d97706; font-size: 1.2rem; margin-top: 3px;"></i>
+                            <div>
+                                <h3 style="font-size: 1rem;">Best Campus Ambassador Award</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Robotech Valley | August 2021</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 15px; align-items: start;">
+                            <i class="fas fa-crown" style="color: #d97706; font-size: 1.2rem; margin-top: 3px;"></i>
+                            <div>
+                                <h3 style="font-size: 1rem;">Champion - Team SPARK</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">IEEE Computer Society Bangladesh Chapter | January 2023</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // --- 1. FORCE TOP POSITION ON RELOAD ---
+        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; } else { window.onbeforeunload = function () { window.scrollTo(0, 0); } }
+
+        // --- 2. SHRINKING NAV ON SCROLL ---
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.top-nav');
+            if (window.scrollY > 80) { nav.classList.add('shrink'); } else { nav.classList.remove('shrink'); }
+        });
+
+        // --- 3. TYPEWRITER EFFECT ---
+        const roles = ["MS in CS (Intelligent System)", "Junior AI Engineer", "Researcher", "Machine Learning & Computer Vision"];
+        let roleIndex = 0; let charIndex = 0; let isDeleting = false;
+        const typeTarget = document.getElementById('typewriter');
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) { typeTarget.textContent = currentRole.substring(0, charIndex - 1); charIndex--; } else { typeTarget.textContent = currentRole.substring(0, charIndex + 1); charIndex++; }
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentRole.length) { typeSpeed = 2000; isDeleting = true; } else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
+            setTimeout(typeEffect, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', typeEffect);
+
+        // --- 4. SCROLL ANIMATION ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(section => { observer.observe(section); });
+
+        // --- 5. ACTIVE NAV LINK ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.top-nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => { const sectionTop = section.offsetTop; if (scrollY >= sectionTop - 200) { current = section.getAttribute('id'); } });
+            navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href').includes(current)) { link.classList.add('active'); } });
+        });
+
+        // --- PHD CALLOUT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const phd = document.getElementById('phdCallout');
+            const dismiss = document.getElementById('phdDismiss');
+            try {
+                if (!phd) return;
+                const hidden = localStorage.getItem('phdHidden') === 'true';
+                if (hidden) { phd.style.display = 'none'; }
+                if (dismiss) {
+                    dismiss.addEventListener('click', () => { phd.style.display = 'none'; localStorage.setItem('phdHidden', 'true'); });
+                }
+            } catch (e) { /* no-op in older browsers */ }
+        });
+    </script>
+</body>
+
+</html>
